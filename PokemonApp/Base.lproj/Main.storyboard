@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +22,7 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Cz6-M0-tru">
                                         <rect key="frame" x="0.0" y="110" width="414" height="786"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="redColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="g6r-wc-Wc5" customClass="CharacterTableViewCell" customModule="PokemonApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="50" width="414" height="150"/>
@@ -47,7 +48,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="xYi-hT-TqE" firstAttribute="centerY" secondItem="3b8-Oc-cTW" secondAttribute="centerY" id="5qZ-hC-eGl"/>
                                                                 <constraint firstItem="N5T-0o-lGP" firstAttribute="centerY" secondItem="3b8-Oc-cTW" secondAttribute="centerY" id="7Rr-OT-BQI"/>
@@ -65,11 +66,11 @@
                                                         <constraint firstItem="3b8-Oc-cTW" firstAttribute="top" secondItem="8gx-PV-4Mt" secondAttribute="topMargin" id="yPi-v4-sg0"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" name="redColor"/>
                                                 <connections>
                                                     <outlet property="cellView" destination="3b8-Oc-cTW" id="2dQ-sT-gI5"/>
                                                     <outlet property="characterImageView" destination="N5T-0o-lGP" id="XNv-9G-ZBe"/>
                                                     <outlet property="characterNameLabel" destination="xYi-hT-TqE" id="lJq-lO-IVy"/>
-                                                    <segue destination="MVt-u2-T1j" kind="presentation" id="I16-2Q-M3M"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -86,7 +87,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="backgroundColor" name="redColor"/>
                                 <constraints>
                                     <constraint firstItem="Cz6-M0-tru" firstAttribute="top" secondItem="mhG-yT-VNP" secondAttribute="top" constant="110" id="3l8-8s-S43"/>
                                     <constraint firstItem="Cz6-M0-tru" firstAttribute="top" secondItem="3IV-fT-RFX" secondAttribute="bottom" constant="8" symbolic="YES" id="Vlu-iR-bZG"/>
@@ -98,7 +99,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="redColor"/>
                         <constraints>
                             <constraint firstItem="mhG-yT-VNP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1L3-rG-1jH"/>
                             <constraint firstAttribute="bottom" secondItem="mhG-yT-VNP" secondAttribute="bottom" id="nH0-cI-KVY"/>
@@ -109,6 +110,7 @@
                     <navigationItem key="navigationItem" id="sYA-Ha-PVg"/>
                     <connections>
                         <outlet property="characterTableView" destination="Cz6-M0-tru" id="epJ-mG-pCb"/>
+                        <segue destination="MVt-u2-T1j" kind="showDetail" identifier="showDetail" id="B5q-T5-G7a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -126,7 +128,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-kd-UPf">
                                 <rect key="frame" x="-200" y="288.5" width="814" height="797.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeBall" translatesAutoresizingMaskIntoConstraints="NO" id="SWa-Wm-cqE">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeBall" translatesAutoresizingMaskIntoConstraints="NO" id="SWa-Wm-cqE">
                                         <rect key="frame" x="287" y="-125" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="hOd-fU-545"/>
@@ -134,15 +136,22 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSn-HJ-hWZ">
-                                        <rect key="frame" x="338.5" y="135" width="137.5" height="36"/>
+                                        <rect key="frame" x="338.5" y="115" width="137.5" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQv-ga-SXY">
+                                        <rect key="frame" x="217" y="216" width="129" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
-                                    <constraint firstItem="XSn-HJ-hWZ" firstAttribute="top" secondItem="SWa-Wm-cqE" secondAttribute="bottom" constant="20" id="uzM-31-glK"/>
+                                    <constraint firstItem="XSn-HJ-hWZ" firstAttribute="top" secondItem="SWa-Wm-cqE" secondAttribute="bottom" id="uzM-31-glK"/>
                                     <constraint firstItem="XSn-HJ-hWZ" firstAttribute="centerX" secondItem="c9R-kd-UPf" secondAttribute="centerX" id="yvd-5e-GkN"/>
                                     <constraint firstItem="SWa-Wm-cqE" firstAttribute="centerX" secondItem="c9R-kd-UPf" secondAttribute="centerX" id="zII-yt-xgy"/>
                                     <constraint firstItem="SWa-Wm-cqE" firstAttribute="top" secondItem="c9R-kd-UPf" secondAttribute="top" constant="-125" id="zL1-qa-xX4"/>
@@ -190,14 +199,14 @@
     <resources>
         <image name="pokeBall" width="1024" height="1022"/>
         <image name="pokemonLogo" width="269.468994140625" height="98.814002990722656"/>
+        <namedColor name="redColor">
+            <color red="0.70599997043609619" green="0.14499999582767487" blue="0.097999997437000275" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
