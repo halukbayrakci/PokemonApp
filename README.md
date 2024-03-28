@@ -8,6 +8,7 @@ PokemonApp is an iOS application that displays detailed information of various P
     <li>SDWebImage</li>
     <li>SDWebImageSvgKitPlugin</li>
     <li>MVVM Design Pattern</li>
+    <li>API https://pokeapi.co/</li>
     <li>Compatible with iOS 12.0+</li>
     <li>Fully SPM build</li>
   </ul>
