@@ -22,4 +22,9 @@ class PokemonDetailViewModel {
         }
     }
     
+    func formatHeighWeight(value : Int) -> String {
+        let dValue                  = Double(value)
+        let string                  = String(format: "%.1f", dValue / 10)
+        return string
+    }
 }

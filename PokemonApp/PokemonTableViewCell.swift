@@ -26,7 +26,7 @@ class PokemonTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
- 
+    
     
     func configure(with pokemon: Pokemon) {
         characterNameLabel.text = pokemon.name.uppercased()
@@ -38,7 +38,6 @@ class PokemonTableViewCell: UITableViewCell {
     }
     
     private func extractPokemonId(from urlString: String) -> Int? {
-        // URL'den Pokemon ID'sini çıkarma mantığı
         if let urlComponents = URL(string: urlString)?.pathComponents,
            let idString = urlComponents.last,
            let id = Int(idString) {
@@ -47,7 +46,7 @@ class PokemonTableViewCell: UITableViewCell {
         return nil
     }
     
-
-
+    
+    
     
 }

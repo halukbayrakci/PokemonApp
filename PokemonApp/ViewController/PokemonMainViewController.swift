@@ -13,7 +13,7 @@ final class PokemonMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         fetchPokemonData()
     }
     
@@ -25,16 +25,29 @@ final class PokemonMainViewController: UIViewController {
         }
     }
     
+    private func extractPokemonId(from urlString: String) -> Int? {
+        if let urlComponents = URL(string: urlString)?.pathComponents,
+           let idString = urlComponents.last,
+           let id = Int(idString) {
+            return id
+        }
+        return nil
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            if let detailVC = segue.destination as? PokemonDetailViewController, let pokemon = sender as? Pokemon {
-                detailVC.pokemonName = pokemon.name
-                detailVC.pokemonImageURL = "\(pokemon.url)"
-                
-                print("Segue ile aktarılan Pokémon:", pokemon.name)
+            if let detailVC = segue.destination as? PokemonDetailViewController {
+                if let selectedIndex = sender as? Int {
+                    let selectedPokemon = viewModel.pokemons[selectedIndex]
+                    detailVC.pokemonId = extractPokemonId(from: selectedPokemon.url)
+                    detailVC.pokemonName = selectedPokemon.name
+                    detailVC.pokemonImageURL = "\(selectedPokemon.url)"
+                    print("Segue ile aktarılan Pokémon:", selectedPokemon.name)
+                }
             }
         }
     }
+    
     
 }
 
@@ -59,8 +72,9 @@ extension PokemonMainViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let pokemon = viewModel.pokemons[indexPath.row]
-        performSegue(withIdentifier: "showDetail", sender: pokemon)
+        //        let pokemon = viewModel.pokemons[indexPath.row]
+        let selectedPokemon = viewModel.pokemons[indexPath.row]
+        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
     }
 }
 
