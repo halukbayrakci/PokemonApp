@@ -82,12 +82,11 @@
 			children = (
 				810B73902BB35066002C9B44 /* AppDelegate.swift */,
 				810B73922BB35066002C9B44 /* SceneDelegate.swift */,
-				810B73CD2BB4D91A002C9B44 /* Helper */,
+				810B73BD2BB443FE002C9B44 /* Model */,
 				810B73BB2BB443DF002C9B44 /* Network */,
 				810B73C82BB4ADF5002C9B44 /* ViewModel */,
-				810B73BD2BB443FE002C9B44 /* Model */,
 				810B73AA2BB38847002C9B44 /* ViewController */,
-				810B73A42BB3572A002C9B44 /* PokemonTableViewCell.swift */,
+				810B73CD2BB4D91A002C9B44 /* Helper */,
 				810B73962BB35066002C9B44 /* Main.storyboard */,
 				810B73992BB35068002C9B44 /* Assets.xcassets */,
 				810B739B2BB35068002C9B44 /* LaunchScreen.storyboard */,
@@ -101,6 +100,7 @@
 			children = (
 				810B73942BB35066002C9B44 /* PokemonMainViewController.swift */,
 				810B73A62BB35C34002C9B44 /* PokemonDetailViewController.swift */,
+				812A29E02BB62EE200E2DC11 /* TableViewCell */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -138,6 +138,14 @@
 				812A29DE2BB6056800E2DC11 /* TypeColors.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		812A29E02BB62EE200E2DC11 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				810B73A42BB3572A002C9B44 /* PokemonTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PokemonDetailViewModel {
+final class PokemonDetailViewModel {
     private let networkManager: NetworkManagerProtocol
     var pokemon: PokemonDetail?
     var pokemonID: Int
@@ -72,14 +72,10 @@ class PokemonDetailViewModel {
     }
     
     private func fetchDetailPokemon(pokemonID: Int) {
-//        print("Pokemon ayrıntıları yükleniyor, ID: \(pokemonID)")
         networkManager.fetchPokemonDetail(pokemonID: pokemonID) { [weak self] result in
             switch result {
             case .success(let pokemonDetail):
                 self?.pokemon = pokemonDetail
-                self?.printPokemonTypes(pokemonDetail)
-                print("İlk Tip: \(self?.characterFirstType ?? "Bilinmiyor")")
-                print("İkinci Tip: \(self?.characterSecondType ?? "Bilinmiyor")")
                 self?.reload?()
             case .failure(let error):
                 self?.error?(error.localizedDescription)
@@ -87,16 +83,6 @@ class PokemonDetailViewModel {
             }
         }
     }
-    
-    private func printPokemonTypes(_ pokemonDetail: PokemonDetail) {
-            if let types = pokemonDetail.types {
-                for type in types {
-                    print("Type name: \(type.type?.name ?? "Unknown")")
-                }
-            } else {
-                print("No types available for this Pokémon.")
-            }
-        }
     
     func formatHeighWeight(value : Int) -> String {
         let dValue = Double(value)

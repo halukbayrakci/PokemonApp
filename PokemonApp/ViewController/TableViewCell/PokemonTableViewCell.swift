@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 import SDWebImageSVGKitPlugin
 
-class PokemonTableViewCell: UITableViewCell {
+final class PokemonTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var characterNameLabel: UILabel!
@@ -26,7 +26,6 @@ class PokemonTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
     
     func configure(with pokemon: Pokemon) {
         characterNameLabel.text = pokemon.name?.uppercased()

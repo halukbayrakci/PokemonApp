@@ -34,7 +34,7 @@ final class NetworkManager: NetworkManagerProtocol {
         }
 
     }
-    
+   
     func fetchPokemonDetail(pokemonID: Int, completion: @escaping (Result<PokemonDetail, Error>) -> Void) {
         guard let url = URL(string: "\(ApiConstants.getDetailPokemon)\(pokemonID)") else {
             completion(.failure(NSError(domain: "Url Error", code: 0)))

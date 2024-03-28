@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PokemonMainViewModel {
+final class PokemonMainViewModel {
     private let networkManager: NetworkManagerProtocol
     var pokemons: [Pokemon] = []
     var reload: (()-> Void)?

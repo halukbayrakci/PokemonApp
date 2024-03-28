@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class PokemonMainViewController: UIViewController {
     @IBOutlet weak var pokemonTableView: UITableView!
     
@@ -17,12 +18,10 @@ final class PokemonMainViewController: UIViewController {
         viewModel.error = showError()
     }
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let detailVC = segue.destination as? PokemonDetailViewController {
                 if let selectedIndex = sender as? Int {
-                    let selectedPokemon = viewModel.pokemons[selectedIndex]
                     let vm = PokemonDetailViewModel(pokemonID: viewModel.extractPokemonId(from: selectedIndex))
                     detailVC.viewModel = vm
                 }
@@ -41,7 +40,9 @@ final class PokemonMainViewController: UIViewController {
     private func showError() -> (String) -> Void {
         return { errorString in
             DispatchQueue.main.async {
-                //ALERT EKLENECEK ios alert
+                let alert = UIAlertController(title: "Hata", message: errorString, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+                self.present(alert, animated: true)
             }
         }
     }
@@ -65,7 +66,6 @@ extension PokemonMainViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        _ = viewModel.pokemons[indexPath.row]
         performSegue(withIdentifier: "showDetail", sender: indexPath.row)
     }
 }

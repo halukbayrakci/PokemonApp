@@ -36,7 +36,7 @@ final class PokemonDetailViewController: UIViewController {
         super.viewDidLoad()
         viewModel = PokemonDetailViewModel(pokemonID: viewModel.pokemonID)
        
-        viewModel.reload = updateUIfun()
+        viewModel.reload = updateUI()
         viewModel.error = showError()
    
     }
@@ -46,11 +46,11 @@ final class PokemonDetailViewController: UIViewController {
         characterImageView.image = nil
     }
     
-    private func updateUIfun() -> () -> Void {
+    private func updateUI() -> () -> Void {
         return {
             DispatchQueue.main.async {
                 self.loadPokemonImage()
-                self.updateUI()
+                self.updateUIElements()
             }
         }
     }
@@ -58,7 +58,6 @@ final class PokemonDetailViewController: UIViewController {
     private func showError() -> (String) -> Void {
         return { errorString in
             DispatchQueue.main.async {
-                //ALERT EKLENECEK
                 let alert = UIAlertController(title: "Hata", message: errorString, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: .default))
                 self.present(alert, animated: true)
@@ -66,7 +65,7 @@ final class PokemonDetailViewController: UIViewController {
         }
     }
   
-    private func updateUI() {
+    private func updateUIElements() {
       
         characterWeightLabel.text = viewModel.formattedWeight
         characterHeightLabel.text = viewModel.formattedHeight
@@ -96,8 +95,7 @@ final class PokemonDetailViewController: UIViewController {
         characterEXPProgressView.progress = Float(viewModel.speedStat) / 100.0
         
     }
-    
-    
+ 
     private func loadPokemonImage() {
         let imageUrl = URL.createPokemonImageUrl(pokemonId: viewModel.pokemonID)
         characterImageView.sd_setImage(with: imageUrl, completed: nil)
