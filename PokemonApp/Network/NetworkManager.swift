@@ -21,7 +21,6 @@ protocol NetworkManagerProtocol {
     func fetchPokemonDetail(pokemonID: Int, completion: @escaping (Result<PokemonDetail, Error>) -> Void)
 }
 
-
 final class NetworkManager: NetworkManagerProtocol {
     
     func fetchPokemonList(completion: @escaping (Result<PokemonList, Error>) -> Void) {

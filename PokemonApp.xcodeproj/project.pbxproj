@@ -24,6 +24,7 @@
 		810B73CC2BB4B6BE002C9B44 /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B73CB2BB4B6BE002C9B44 /* PokemonDetailViewModel.swift */; };
 		810B73CF2BB4D927002C9B44 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B73CE2BB4D927002C9B44 /* URL+Extension.swift */; };
 		810B73D52BB4DF00002C9B44 /* SDWebImageSVGKitPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 810B73D42BB4DF00002C9B44 /* SDWebImageSVGKitPlugin */; };
+		812A29DF2BB6056800E2DC11 /* TypeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812A29DE2BB6056800E2DC11 /* TypeColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		810B73C92BB4AE53002C9B44 /* PokemonMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMainViewModel.swift; sourceTree = "<group>"; };
 		810B73CB2BB4B6BE002C9B44 /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		810B73CE2BB4D927002C9B44 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		812A29DE2BB6056800E2DC11 /* TypeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				810B73CE2BB4D927002C9B44 /* URL+Extension.swift */,
+				812A29DE2BB6056800E2DC11 /* TypeColors.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				810B73CC2BB4B6BE002C9B44 /* PokemonDetailViewModel.swift in Sources */,
 				810B73CA2BB4AE53002C9B44 /* PokemonMainViewModel.swift in Sources */,
 				810B73952BB35066002C9B44 /* PokemonMainViewController.swift in Sources */,
+				812A29DF2BB6056800E2DC11 /* TypeColors.swift in Sources */,
 				810B73912BB35066002C9B44 /* AppDelegate.swift in Sources */,
 				810B73932BB35066002C9B44 /* SceneDelegate.swift in Sources */,
 				810B73C12BB45341002C9B44 /* PokemonDetail.swift in Sources */,

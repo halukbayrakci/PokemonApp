@@ -25,8 +25,6 @@ final class PokemonMainViewController: UIViewController {
                     let selectedPokemon = viewModel.pokemons[selectedIndex]
                     let vm = PokemonDetailViewModel(pokemonID: viewModel.extractPokemonId(from: selectedIndex))
                     detailVC.viewModel = vm
-
-                    print("Segue ile aktarılan Pokémon:", selectedPokemon.name)
                 }
             }
         }
@@ -56,22 +54,17 @@ extension PokemonMainViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let pokemon = viewModel.pokemons[indexPath.row]
         
         guard let cell = pokemonTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PokemonTableViewCell else {
             fatalError("Could not dequeue cell")
         }
-        
         cell.configure(with: pokemon)
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        //        let pokemon = viewModel.pokemons[indexPath.row]
         _ = viewModel.pokemons[indexPath.row]
         performSegue(withIdentifier: "showDetail", sender: indexPath.row)
     }
