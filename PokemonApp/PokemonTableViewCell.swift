@@ -29,9 +29,9 @@ class PokemonTableViewCell: UITableViewCell {
     
     
     func configure(with pokemon: Pokemon) {
-        characterNameLabel.text = pokemon.name.uppercased()
+        characterNameLabel.text = pokemon.name?.uppercased()
         
-        if let pokemonId = extractPokemonId(from: pokemon.url) {
+        if let pokemonId = extractPokemonId(from: pokemon.url ?? "") {
             let imageUrl = URL.createPokemonImageUrl(pokemonId: pokemonId)
             characterImageView.sd_setImage(with: imageUrl, completed: nil)
         }

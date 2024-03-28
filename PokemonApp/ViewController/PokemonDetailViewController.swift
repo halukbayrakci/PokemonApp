@@ -28,45 +28,51 @@ final class PokemonDetailViewController: UIViewController {
     @IBOutlet weak var characterSPAProgressView: UIProgressView!
     @IBOutlet weak var characterEXPProgressView: UIProgressView!
     
-    var pokemonName: String?
-    var pokemonImageURL: String?
-    var pokemonId: Int?
-    
     var viewModel: PokemonDetailViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+   
+        viewModel.reload = updateUIfun()
+        viewModel.error = showError()
         
-        characterNameLabel.text = pokemonName?.uppercased()
-        
-        
-        loadPokemonImage()
-        updateUI()
-        viewModel = PokemonDetailViewModel()
-        
-        fetchPokemonDetails(pokemonId: pokemonId!)
     }
     
-    func fetchPokemonDetails(pokemonId: Int) {
-        viewModel.fetchPokemonDetails(pokemonId: pokemonId) { [weak self] in
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        characterImageView.image = nil
+    }
+    private func updateUIfun() -> () -> Void {
+        return {
             DispatchQueue.main.async {
-                self?.updateStatsUI()
+                self.loadPokemonImage()
+                self.updateUI()
+                self.updateStatsUI()
             }
         }
     }
     
+    private func showError() -> (String) -> Void {
+        return { errorString in
+            DispatchQueue.main.async {
+                //ALERT EKLENECEK
+            }
+        }
+    }
+  
     
     func updateStatsUI() {
         guard let stats = viewModel.pokemon?.stats else { return }
         
-        let hpStat = stats.first(where: { $0.stat.name == "hp" })?.baseStat ?? 0
-        let attackStat = stats.first(where: { $0.stat.name == "attack" })?.baseStat ?? 0
-        let defenseStat = stats.first(where: { $0.stat.name == "defense" })?.baseStat ?? 0
-        let speedStat = stats.first(where: { $0.stat.name == "speed" })?.baseStat ?? 0
-        let specialAttackStat = stats.first(where: { $0.stat.name == "special-attack" })?.baseStat ?? 0
-        let specialDefenseStat = stats.first(where: { $0.stat.name == "special-defense" })?.baseStat ?? 0
+        let hpStat = stats.first(where: { $0.stat?.name == "hp" })?.baseStat ?? 0
+        let attackStat = stats.first(where: { $0.stat?.name == "attack" })?.baseStat ?? 0
+        let defenseStat = stats.first(where: { $0.stat?.name == "defense" })?.baseStat ?? 0
+        let speedStat = stats.first(where: { $0.stat?.name == "speed" })?.baseStat ?? 0
+        let specialAttackStat = stats.first(where: { $0.stat?.name == "special-attack" })?.baseStat ?? 0
+        let specialDefenseStat = stats.first(where: { $0.stat?.name == "special-defense" })?.baseStat ?? 0
         
-        
+        //storyboarddan verilecek
         characterStatHP.text = "HP"
         characterStatATK.text = "ATK"
         characterStatDEF.text = "DEF"
@@ -84,45 +90,34 @@ final class PokemonDetailViewController: UIViewController {
         characterSPAProgressView.progress = Float(specialAttackStat) / 100.0
         characterEXPProgressView.progress = Float(speedStat) / 100.0
         
-        guard let pokemon = viewModel.pokemon else {
-            print("Pokemon bilgisi yok")
-            return
-        }
-        
-        // Konsolda Pokémon detaylarını göster
-        print("Pokemon Adı: \(pokemon.name)")
-        print("Ağırlık: \(pokemon.weight)")
-        print("Boy: \(pokemon.height)")
-        
-        for stat in pokemon.stats {
-            print("\(stat.stat.name.uppercased()): \(stat.baseStat)")
-        }
+//        guard let pokemon = viewModel.pokemon else {
+//            print("Pokemon bilgisi yok")
+//            return
+//        }
+//        
+//        // Konsolda Pokémon detaylarını göster
+//        print("Pokemon Adı: \(pokemon.name)")
+//        print("Ağırlık: \(pokemon.weight)")
+//        print("Boy: \(pokemon.height)")
+//        
+//        for stat in pokemon.stats ?? [] {
+//            print("\(stat.stat?.name?.uppercased()): \(stat.baseStat)")
+//        }
     }
     
     private func updateUI() {
+        //storyboarddan verilecek
         self.view.backgroundColor = UIColor(named: "redColor")
         characterDetailView.backgroundColor = .white
-        //        characterDetailView.layer.cornerRadius = 400
+        //characterDetailView.layer.cornerRadius = 400
+        characterNameLabel.text = viewModel.characterName
         
     }
     
     private func loadPokemonImage() {
-        if let pokemonId = extractPokemonId(from: pokemonImageURL!) {
-            let imageUrl = URL.createPokemonImageUrl(pokemonId: pokemonId)
-            characterImageView.sd_setImage(with: imageUrl, completed: nil)
-        }
+        let imageUrl = URL.createPokemonImageUrl(pokemonId: viewModel.pokemonID)
+        characterImageView.sd_setImage(with: imageUrl, completed: nil)
+
     }
-    
-    private func extractPokemonId(from urlString: String) -> Int? {
-        if let urlComponents = URL(string: urlString)?.pathComponents,
-           let idString = urlComponents.last,
-           let id = Int(idString) {
-            return id
-        }
-        return nil
-    }
-    
-    
-    
     
 }

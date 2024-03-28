@@ -9,45 +9,44 @@ import UIKit
 final class PokemonMainViewController: UIViewController {
     @IBOutlet weak var pokemonTableView: UITableView!
     
-    var viewModel = PokemonMainViewModel()
-    
+    private var viewModel = PokemonMainViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchPokemonData()
+        viewModel.reload = reloadTableView()
+        viewModel.error = showError()
     }
-    
-    private func fetchPokemonData() {
-        viewModel.fetchPokemons { [weak self] in
-            DispatchQueue.main.async {
-                self?.pokemonTableView.reloadData()
-            }
-        }
-    }
-    
-    private func extractPokemonId(from urlString: String) -> Int? {
-        if let urlComponents = URL(string: urlString)?.pathComponents,
-           let idString = urlComponents.last,
-           let id = Int(idString) {
-            return id
-        }
-        return nil
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let detailVC = segue.destination as? PokemonDetailViewController {
                 if let selectedIndex = sender as? Int {
                     let selectedPokemon = viewModel.pokemons[selectedIndex]
-                    detailVC.pokemonId = extractPokemonId(from: selectedPokemon.url)
-                    detailVC.pokemonName = selectedPokemon.name
-                    detailVC.pokemonImageURL = "\(selectedPokemon.url)"
+                    let vm = PokemonDetailViewModel(pokemonID: viewModel.extractPokemonId(from: selectedIndex))
+                    detailVC.viewModel = vm
+
                     print("Segue ile aktarılan Pokémon:", selectedPokemon.name)
                 }
             }
         }
     }
     
+    private func reloadTableView() -> () -> Void {
+        return {
+            DispatchQueue.main.async {
+                self.pokemonTableView.reloadData()
+            }
+        }
+    }
+    
+    private func showError() -> (String) -> Void {
+        return { errorString in
+            DispatchQueue.main.async {
+                //ALERT EKLENECEK ios alert
+            }
+        }
+    }
     
 }
 
@@ -73,7 +72,7 @@ extension PokemonMainViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.deselectRow(at: indexPath, animated: true)
         
         //        let pokemon = viewModel.pokemons[indexPath.row]
-        let selectedPokemon = viewModel.pokemons[indexPath.row]
+        _ = viewModel.pokemons[indexPath.row]
         performSegue(withIdentifier: "showDetail", sender: indexPath.row)
     }
 }

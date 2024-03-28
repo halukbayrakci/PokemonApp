@@ -8,28 +8,36 @@
 import Foundation
 
 class PokemonMainViewModel {
-    private let networkManager: NetworkManager
+    private let networkManager: NetworkManagerProtocol
     var pokemons: [Pokemon] = []
-    var pokemonDetails: [Int: PokemonDetail] = [:]
+    var reload: (()-> Void)?
+    var error: ((String)-> Void)?
     
-    init(networkManager: NetworkManager = NetworkManager.shared) {
-        self.networkManager = networkManager
+    init() {
+        self.networkManager = NetworkManager()
+        fetchPokemons()
     }
     
-    func  fetchPokemons(completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchPokemonList { [weak self] result in
-            self?.pokemons = result
-            completion()
-        }
-    }
-    
-    func fetchPokemonDetail(pokemonId: Int, completion: @escaping (PokemonDetail) -> Void) {
-        networkManager.fetchPokemonDetail(pokemonId: pokemonId) { [weak self] result in
-            if let detail = result {
-                self?.pokemonDetails[pokemonId] = detail
-                completion(detail)
+    private func fetchPokemons() {
+        networkManager.fetchPokemonList { [weak self] result in
+            switch result {
+            case .success(let pokemonList):
+                self?.pokemons = pokemonList.results ?? []
+                self?.reload?()
+            case .failure(let error):
+                self?.error?(error.localizedDescription)
             }
         }
     }
+    
+    func extractPokemonId(from index: Int) -> Int {
+        if let urlComponents = URL(string: pokemons[index].url ?? "" )?.pathComponents,
+           let idString = urlComponents.last,
+           let id = Int(idString) {
+            return id
+        }
+        return 0
+    }
+    
     
 }
