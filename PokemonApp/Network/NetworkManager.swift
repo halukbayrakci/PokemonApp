@@ -10,50 +10,36 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     
-    
-    func fetchPokemons(completion: @escaping ([Pokemon]) -> Void) {
-        let urlString = "https://pokeapi.co/api/v2/pokemon?limit=\(100)"
-        guard let url = URL(string: urlString) else {
-            completion([])
-            return
-        }
+    func fetchPokemonList(completion: @escaping ([Pokemon]) -> Void) {
+        let urlString = "https://pokeapi.co/api/v2/pokemon?limit=50"
+        guard let url = URL(string: urlString) else { return }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                completion([])
-                return
-            }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
             
             do {
-                let pokemonResponse = try JSONDecoder().decode(PokemonResponse.self, from: data)
-                let pokemons = pokemonResponse.results.map { Pokemon(name: $0.name, url: $0.url) }
-                completion(pokemons)
+                let pokemonListResponse = try JSONDecoder().decode(PokemonList.self, from: data)
+                completion(pokemonListResponse.results)
             } catch {
                 completion([])
             }
-        }
-        task.resume()
+        }.resume()
     }
     
-    func fetchPokemonImageURL(pokemonDetailURL: String, completion: @escaping (String?) -> Void) {
-        guard let url = URL(string: pokemonDetailURL) else {
-            completion(nil)
-            return
-        }
+    func fetchPokemonDetail(pokemonId: Int, completion: @escaping (PokemonDetail?) -> Void) {
+        let urlString = "https://pokeapi.co/api/v2/pokemon/\(pokemonId)"
+        guard let url = URL(string: urlString) else { return }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(nil)
-                return
-            }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
             
             do {
-                let details = try JSONDecoder().decode(DetailedPokemon.self, from: data)
-                completion(details.sprites.front_default)
+                let pokemonDetail = try JSONDecoder().decode(PokemonDetail.self, from: data)
+                completion(pokemonDetail)
             } catch {
+                print("Error decoding Pokemon detail:", error.localizedDescription)
                 completion(nil)
             }
-        }
-        task.resume()
+        }.resume()
     }
 }

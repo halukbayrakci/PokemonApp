@@ -7,20 +7,14 @@
 
 import Foundation
 
+struct PokemonList: Codable {
+    let  results: [Pokemon]
+}
+
 struct Pokemon: Codable {
     let name: String
     let url: String
 }
 
-struct PokemonResponse: Codable {
-    let results: [Pokemon]
-}
 
-struct DetailedPokemon: Codable {
-    let sprites: Sprites
-}
 
-struct Sprites: Codable {
-    let front_default: String? // Pokémon'un resim URL'si
-    
-}

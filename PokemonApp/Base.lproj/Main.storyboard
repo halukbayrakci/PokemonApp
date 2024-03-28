@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Character View Controller-->
+        <!--Pokemon Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CharacterViewController" customModule="PokemonApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PokemonMainViewController" customModule="PokemonApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="110" width="414" height="786"/>
                                         <color key="backgroundColor" name="redColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="g6r-wc-Wc5" customClass="CharacterTableViewCell" customModule="PokemonApp" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="g6r-wc-Wc5" customClass="PokemonTableViewCell" customModule="PokemonApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="50" width="414" height="150"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g6r-wc-Wc5" id="8gx-PV-4Mt">
@@ -34,7 +34,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-Oc-cTW">
                                                             <rect key="frame" x="20" y="11" width="374" height="128"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeBall" translatesAutoresizingMaskIntoConstraints="NO" id="N5T-0o-lGP">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeBall" translatesAutoresizingMaskIntoConstraints="NO" id="N5T-0o-lGP">
                                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="128" id="Yj2-Sb-upV"/>
@@ -109,7 +109,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="sYA-Ha-PVg"/>
                     <connections>
-                        <outlet property="characterTableView" destination="Cz6-M0-tru" id="epJ-mG-pCb"/>
+                        <outlet property="pokemonTableView" destination="Cz6-M0-tru" id="epJ-mG-pCb"/>
                         <segue destination="MVt-u2-T1j" kind="showDetail" identifier="showDetail" id="B5q-T5-G7a"/>
                     </connections>
                 </viewController>
@@ -117,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="-34.151785714285715"/>
         </scene>
-        <!--Character Detail View Controller-->
+        <!--Pokemon Detail View Controller-->
         <scene sceneID="Fmj-ec-dAj">
             <objects>
-                <viewController id="MVt-u2-T1j" customClass="CharacterDetailViewController" customModule="PokemonApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MVt-u2-T1j" customClass="PokemonDetailViewController" customModule="PokemonApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QkM-u3-G5y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +128,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-kd-UPf">
                                 <rect key="frame" x="-200" y="288.5" width="814" height="797.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeBall" translatesAutoresizingMaskIntoConstraints="NO" id="SWa-Wm-cqE">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeBall" translatesAutoresizingMaskIntoConstraints="NO" id="SWa-Wm-cqE">
                                         <rect key="frame" x="287" y="-125" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="hOd-fU-545"/>
